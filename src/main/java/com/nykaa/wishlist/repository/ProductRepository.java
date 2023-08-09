@@ -9,6 +9,7 @@ import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 import com.nykaa.wishlist.model.Product;
 import com.nykaa.wishlist.model.TestProduct;
 import com.nykaa.wishlist.repository.ProductRepository;
+import org.socialsignin.spring.data.dynamodb.repository.DynamoDBCrudRepository;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -16,8 +17,11 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-/*public interface ProductRepository extends CrudRepository<Product,String> {
+/*
+public interface ProductRepository extends DynamoDBCrudRepository<Product,String> {
 }*/
+
+
 
 @EnableScan
 
@@ -37,14 +41,15 @@ public class ProductRepository {
     public Product findById(String id) {
         return dynamoDBMapper.load(Product.class, id);
     }
-    public TestProduct findAll() {return null;
-//    return dynamoDBMapper.scan(Product.class, new DynamoDBScanExpression());
+    public TestProduct findAll()  { return null;
+          //return dynamoDBMapper.scan(Product.class, new DynamoDBScanExpression());
     }
 
     public void deleteById(String customerId) {
         dynamoDBMapper.delete(dynamoDBMapper.load(Product.class, customerId));
 
     }
+
 
 
 
@@ -59,7 +64,9 @@ public class ProductRepository {
     }
 */
 
+
 }
+
 
 
 

@@ -3,8 +3,11 @@ package com.nykaa.wishlist.service;
 import com.nykaa.wishlist.model.Product;
 import com.nykaa.wishlist.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +29,10 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product getProductById(String id) {
-        return  null;
-                //productRepository.findById(id);
+        return productRepository.findById(id);
          }
+
+
 //        orElseThrow(() -> new ResourceNotFoundException("Product Not Found"+id));
 
 
