@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @Repository
 /*
@@ -34,15 +37,21 @@ public class ProductRepository {
     private DynamoDBMapper dynamoDBMapper;
 
     public Product save(Product product) {
-        dynamoDBMapper.save(product);
+        dynamoDBMapper.batchSave(product);
         return product;
     }
 
-    public Product findById(String id) {
-        return dynamoDBMapper.load(Product.class, id);
+    public Product findById(String id , String pID) {
+        return dynamoDBMapper.load(Product.class, id , pID );
     }
-    public TestProduct findAll()  { return null;
-          //return dynamoDBMapper.scan(Product.class, new DynamoDBScanExpression());
+    public List<Product> findAll( String userBucketId)  {
+       // return null;
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("userBucketId = :val")
+                .withExpressionAttributeValues(Collections.singletonMap(":val", new AttributeValue(userBucketId)));
+
+        return dynamoDBMapper.scan(Product.class, scanExpression);
+        //return dynamoDBMapper.scan( Product.class, userBucketId));
     }
 
     public void deleteById(String customerId) {
