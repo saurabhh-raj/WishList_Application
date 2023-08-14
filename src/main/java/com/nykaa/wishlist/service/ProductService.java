@@ -3,12 +3,14 @@ package com.nykaa.wishlist.service;
 import com.nykaa.wishlist.model.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
+//    static List<Product> queryForRecords(String id, String pID) {
+//    }
+
     List<Product> getProductList(String userBucketId);
-    Product saveProduct(Product product);
-    Product getProductById(String id  , String pId);
+    String saveProduct(Product product  );
+    List<Product> getProductById(String id  , String pId );
     Product updateProduct(String id,Product product , String pId);
     void deleteProduct(String id , String pId);
 }

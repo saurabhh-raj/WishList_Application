@@ -3,13 +3,9 @@ package com.nykaa.wishlist.service;
 import com.nykaa.wishlist.model.Product;
 import com.nykaa.wishlist.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -26,13 +22,14 @@ public class ProductServiceImpl implements ProductService{
 
 
     @Override
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
+    public String saveProduct(Product product ) {
+
+        return (String)productRepository.save(product  );
     }
 
-    @Override
-    public Product getProductById(String id , String Pid) {
-        return productRepository.findById(id , Pid);
+//    @Override
+    public List<Product> getProductById(String id , String Pid ) {
+        return (List<Product>)productRepository.findById(id , Pid );
          }
 
 
@@ -42,14 +39,15 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product updateProduct(String id, Product product , String pId) {
         productRepository.findById(id , pId);
+        return null;
 //                .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"+id));
-        return productRepository.save(product);
+       // return productRepository.save(product);
     }
 
     @Override
-    public void deleteProduct(String id , String pId) {
-        productRepository.findById(id , pId);
+    public void deleteProduct(String wid , String pid) {
+        productRepository.findById(wid , pid);
 //                .orElseThrow(() -> new ResourceNotFoundException("Product Not Found :"+id));
-        productRepository.deleteById(id);
+        productRepository.deleteById(wid , pid);
     }
 }
