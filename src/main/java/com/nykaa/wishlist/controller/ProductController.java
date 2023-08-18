@@ -37,7 +37,10 @@ public class ProductController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
+    @RequestMapping(value = "/custom", method = RequestMethod.POST)
+    public String custom() {
+        return "custom";
+    }
 
     @PostMapping("/product")
     public ResponseEntity<String> saveProduct(@RequestBody @Valid Product product){
@@ -77,11 +80,11 @@ public class ProductController {
     public String deleteProductById(@RequestParam String wid ,  String pid){
         return productService.deleteProduct(wid , pid);
     }
-  /* @PostMapping("/signup")
+   @PostMapping("/signup")
     public String Signup(@RequestBody User user) throws ResourceNotFoundException {
         return userService.createUser(user);
 
-    }*/
+    }
     @PostMapping("/signin")    //ResponseEntity<String>
         public String login(@RequestBody User user) {
 
