@@ -4,6 +4,7 @@ package com.nykaa.wishlist.repository;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nykaa.wishlist.model.Product;
 
@@ -12,10 +13,7 @@ import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -34,7 +32,7 @@ public class ProductRepository {
 
 
     @Autowired
-    private DynamoDBMapper dynamoDBMapper;
+    private  DynamoDBMapper dynamoDBMapper;
 
     public String save(Product product) {
   /*     Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
@@ -56,7 +54,7 @@ public class ProductRepository {
         productDTOs.add(product);
         for(Product x : productDTOs)*/
         dynamoDBMapper.save(product);
-        return  "Product " + product.getName() + " added to :"+ product.getCustomer()+ " 's Wishlist : " + product.getUserBucketId() ;
+        return  "Product " + product.getName() + " added to :"+ product.getCustomer()+ " 's Wishlist : " + product.getUserBucketId() +"or User"+ product.getCustomer()+ "Created";
 
       /*   List<Product> productsFromDynamoDB =  Collections.singletonList(dynamoDBMapper.load(Product.class, id, pID));
         List<Product> productDTOs = productsFromDynamoDB.stream()
@@ -101,7 +99,18 @@ public class ProductRepository {
         dynamoDBMapper.delete(dynamoDBMapper.load(Product.class, wid ,pid));
 
     }
+    public  Product findByUsername(String customer) {
+//        Product p =  ;
 
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("customer = :val")
+                .withExpressionAttributeValues(Collections.singletonMap(":val", new AttributeValue(customer)));
+
+
+    PaginatedScanList<Product> x = dynamoDBMapper.scan(Product.class, scanExpression);
+        if(x== null)return null;
+        else return  x.get(0);
+    }
 
 
 

@@ -1,12 +1,15 @@
 package com.nykaa.wishlist;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.File;
 import java.io.FileInputStream;
 
 @SpringBootApplication
+@EnableAutoConfiguration
 public class WishlistApplication {
 
 	public static void main(String[] args) {

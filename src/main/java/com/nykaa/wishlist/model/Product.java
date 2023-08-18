@@ -23,6 +23,7 @@ public class Product {
 
 
 
+
     public String getUserBucketId() {
         return userBucketId;
     }
@@ -38,11 +39,13 @@ public class Product {
         this.name = name;
     }
 
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
 
-
-
-
-
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public void setUserBucketId(String userBucketId  ) {
         this.userBucketId =   userBucketId;

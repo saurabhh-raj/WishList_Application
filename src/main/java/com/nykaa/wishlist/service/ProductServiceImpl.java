@@ -1,5 +1,6 @@
 package com.nykaa.wishlist.service;
 
+import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.nykaa.wishlist.model.Product;
 import com.nykaa.wishlist.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(String wid , String pid) {
-        productRepository.findById(wid , pid);
-//                .orElseThrow(() -> new ResourceNotFoundException("Product Not Found :"+id));
-        productRepository.deleteById(wid , pid);
+    public String deleteProduct(String wid , String pid) {
+        List <Product> prod = (List <Product>) productRepository.findById(wid , pid);
+        if( prod.size() == 0)throw new ResourceNotFoundException("Product Not Found :"+ wid );
+       else{
+           productRepository.findById(wid , pid);
+           productRepository.deleteById(wid , pid);
+           return "Product " + "with id : " + pid + " deleted from Wishlist " + wid;}
     }
 }

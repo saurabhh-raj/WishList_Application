@@ -12,7 +12,7 @@ public interface ProductService {
     String saveProduct(Product product  );
     List<Product> getProductById(String id  , String pId );
     Product updateProduct(String id,Product product , String pId);
-    void deleteProduct(String id , String pId);
+    String deleteProduct(String id , String pId);
 }
 
 /*

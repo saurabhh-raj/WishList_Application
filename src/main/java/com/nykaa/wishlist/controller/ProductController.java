@@ -1,12 +1,21 @@
 package com.nykaa.wishlist.controller;
-
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.nykaa.wishlist.Util.JwtUtil;
 import com.nykaa.wishlist.WishlistApplication;
+import com.nykaa.wishlist.exception.ResourceNotFoundException;
 import com.nykaa.wishlist.model.Product;
-import com.nykaa.wishlist.model.TestProduct;
+import com.nykaa.wishlist.model.User;
+
+import com.nykaa.wishlist.repository.ProductRepository;
+import com.nykaa.wishlist.repository.UserRepository;
 import com.nykaa.wishlist.service.ProductService;
+import com.nykaa.wishlist.service.UserService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +28,16 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    ProductRepository productRepository;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+
 
     @PostMapping("/product")
     public ResponseEntity<String> saveProduct(@RequestBody @Valid Product product){
@@ -55,7 +74,31 @@ public class ProductController {
           return ResponseEntity.ok(productService.updateProduct(id,product));
       }*/
     @DeleteMapping("/product")
-    public void deleteProductById(@RequestParam String wid ,  String pid){
-        productService.deleteProduct(wid , pid);
+    public String deleteProductById(@RequestParam String wid ,  String pid){
+        return productService.deleteProduct(wid , pid);
     }
+  /* @PostMapping("/signup")
+    public String Signup(@RequestBody User user) throws ResourceNotFoundException {
+        return userService.createUser(user);
+
+    }*/
+    @PostMapping("/signin")    //ResponseEntity<String>
+        public String login(@RequestBody User user) {
+
+        return userService.loginUser(user);
+    }
+
+    @PostMapping("/authenticate")
+    public String generateToken(@RequestBody User authRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            );
+        } catch (Exception ex) {
+            throw new Exception("invalid username/password");
+        }
+        return jwtUtil.generateToken(authRequest.getUsername());
+    }
+
+
 }
