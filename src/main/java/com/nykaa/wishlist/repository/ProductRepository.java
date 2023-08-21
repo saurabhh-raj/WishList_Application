@@ -54,7 +54,7 @@ public class ProductRepository {
         productDTOs.add(product);
         for(Product x : productDTOs)*/
         dynamoDBMapper.save(product);
-        return  "Product " + product.getName() + " added to :"+ product.getCustomer()+ " 's Wishlist : " + product.getUserBucketId() +"or User"+ product.getCustomer()+ "Created";
+        return  "Product " + product.getName() + " added to :"+ product.getCustomer()+ "'s Wishlist : " + product.getUserBucketId() ;
 
       /*   List<Product> productsFromDynamoDB =  Collections.singletonList(dynamoDBMapper.load(Product.class, id, pID));
         List<Product> productDTOs = productsFromDynamoDB.stream()

@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-public class ProductController {
+public class  ProductController {
     @Autowired
     ProductService productService;
     @Autowired
@@ -43,9 +43,12 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public ResponseEntity<String> saveProduct(@RequestBody @Valid Product product){
+    public ResponseEntity<String> saveProduct(@RequestBody @Valid Product product , @RequestHeader("Authorization") String Authorization){
        // product.setUserBucketId(product.getUserBucketId(), product.getCustomerId());
         //product.getCustomerId()+ product.getUserBucketId()
+       String token = Authorization.substring(7);
+        String userName = jwtUtil.extractUsername(token);
+        product.setCustomer(userName);
         return ResponseEntity.ok(productService.saveProduct(product));
     }
 
@@ -68,17 +71,22 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProductList(@RequestParam String userBucketId){
+    public ResponseEntity<List<Product>> getProductList(@RequestParam String userBucketId , @RequestHeader("Authorization") String Authorization){
+        String token = Authorization.substring(7);
+        String userName = jwtUtil.extractUsername(token);
 
-        return ResponseEntity.ok(productService.getProductList(userBucketId));
+        return ResponseEntity.ok(productService.getProductList(userBucketId , userName));
     }
     /*  @PutMapping("/product/{userBucketId}")
       public ResponseEntity<Product> updateProduct(@PathVariable String id,@RequestBody Product product){
           return ResponseEntity.ok(productService.updateProduct(id,product));
       }*/
     @DeleteMapping("/product")
-    public String deleteProductById(@RequestParam String wid ,  String pid){
-        return productService.deleteProduct(wid , pid);
+    public String deleteProductById(@RequestParam String wid ,  String pid , @RequestHeader("Authorization") String Authorization){
+        String token = Authorization.substring(7);
+        String tokenUsername = jwtUtil.extractUsername(token);
+
+        return productService.deleteProduct(wid , pid , tokenUsername);
     }
    @PostMapping("/signup")
     public String Signup(@RequestBody User user) throws ResourceNotFoundException {

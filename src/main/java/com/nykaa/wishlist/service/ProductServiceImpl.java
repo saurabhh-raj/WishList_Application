@@ -15,15 +15,18 @@ public class ProductServiceImpl implements ProductService{
   ProductRepository productRepository;
 
     @Override
-    public List<Product> getProductList( String userBucketId) {
+    public List<Product> getProductList( String userBucketId ,  String tokenUsername) {
 
-        return (List<Product>) productRepository.findAll( userBucketId);
+          List<Product> productsFromDynamoDB =  productRepository.findAll( userBucketId);
+          if(productsFromDynamoDB.get(0).getCustomer().equals(tokenUsername)) {return productsFromDynamoDB;}
+          else return null;
     }
 
 
 
     @Override
     public String saveProduct(Product product ) {
+
 
         return (String)productRepository.save(product  );
     }
@@ -46,12 +49,16 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public String deleteProduct(String wid , String pid) {
+    public String deleteProduct(String wid , String pid , String tokenUsername) {
         List <Product> prod = (List <Product>) productRepository.findById(wid , pid);
         if( prod.size() == 0)throw new ResourceNotFoundException("Product Not Found :"+ wid );
-       else{
-           productRepository.findById(wid , pid);
-           productRepository.deleteById(wid , pid);
-           return "Product " + "with id : " + pid + " deleted from Wishlist " + wid;}
+       else {
+
+            if (prod.get(0).getCustomer().equals(tokenUsername)) {
+                productRepository.findById(wid, pid);
+                productRepository.deleteById(wid, pid);
+                return "Product " + "with id : " + pid + " deleted from Wishlist " + wid;
+            } else return "invalid request , User denied";
+        }
     }
 }
