@@ -1,14 +1,10 @@
 
-import React from 'react';
 
-import Signup from './components/Signup.component.js';
-import Login from './components/Login.component.js';
-import GetProducts from './components/GetProducts.js';
-import AddProducts from './components/AddProducts.js';
-import RemoveProducts from './components/RemoveProducts.js';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function App() {
- /*   const [formData, setFormData] = useState({
+function Signup() {
+    const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
@@ -36,23 +32,33 @@ function App() {
             console.error('An error occurred:', error); // Handle error
         }
     };
-*/
+
     return (
         <div>
-        <Signup/>
-         <Login/>
-         <GetProducts/>
-         <AddProducts/>
-         <RemoveProducts/>
+            <h1>Signup </h1>
+            <form onSubmit={handleSignup}>
+                <div>
+                    <label>Username</label>
+                    <input type="text" name="username" value={formData.username} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} />
+                </div>
+                <button type="submit">Signup</button>
+            </form>
         </div>
     );
 }
 
-export default App;
+export default Signup;
+
 
 /*
 
 import logo from './logo.svg';*//*
+*/
+/*
 
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -89,10 +95,14 @@ function App() {
     } catch (error) {
       console.error("Error sending data:", error);
     }
-    */
+    *//*
+
+*/
 /*   if(this.data === undefined) {return}
           try {  await axios.post("https://localhost:9090/signup", {data : inputValue}).then((res) => { console.log(res.data); }); } catch (error) { console.log(error.response.data.message); }
 *//*
+*/
+/*
 
   };
   return (
@@ -112,3 +122,4 @@ function App() {
 
 export default App;
 */
+

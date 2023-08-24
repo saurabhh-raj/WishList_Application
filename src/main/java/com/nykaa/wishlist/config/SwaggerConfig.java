@@ -1,9 +1,13 @@
 package com.nykaa.wishlist.config;
 
+import org.apache.catalina.filters.CorsFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -59,4 +63,15 @@ public class SwaggerConfig  extends WebMvcConfigurerAdapter {
                 .version("1.0.0")
                 .build();
     }
+
+/*    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("*"); // Allow all origins (you can specify specific origins here)
+        config.addAllowedMethod("*"); // Allow all HTTP methods
+        config.addAllowedHeader("*"); // Allow all headers
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter();
+    }*/
 }

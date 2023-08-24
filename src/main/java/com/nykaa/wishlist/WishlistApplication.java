@@ -3,7 +3,10 @@ package com.nykaa.wishlist;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,4 +39,16 @@ public class WishlistApplication {
 		}
 	}
 
+//	@Bean
+//	public WebMvcConfigurer configure() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry reg) {
+//				reg.addMapping("/**").allowedOrigins("http://localhost:3000")
+//						.allowedMethods("GET", "POST", "PUT", "DELETE")
+//						.allowCredentials(true);
+//
+//			}
+//		};
+//	}
 }

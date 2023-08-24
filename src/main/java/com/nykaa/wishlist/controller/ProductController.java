@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class  ProductController {
     @Autowired
     ProductService productService;
@@ -43,6 +44,7 @@ public class  ProductController {
     }
 
     @PostMapping("/product")
+    @ResponseBody
     public ResponseEntity<String> saveProduct(@RequestBody @Valid Product product , @RequestHeader("Authorization") String Authorization){
        // product.setUserBucketId(product.getUserBucketId(), product.getCustomerId());
         //product.getCustomerId()+ product.getUserBucketId()
@@ -74,7 +76,7 @@ public class  ProductController {
     public ResponseEntity<List<Product>> getProductList(@RequestParam String userBucketId , @RequestHeader("Authorization") String Authorization){
         String token = Authorization.substring(7);
         String userName = jwtUtil.extractUsername(token);
-
+        System.out.println("ptinr");
         return ResponseEntity.ok(productService.getProductList(userBucketId , userName));
     }
     /*  @PutMapping("/product/{userBucketId}")
@@ -82,13 +84,16 @@ public class  ProductController {
           return ResponseEntity.ok(productService.updateProduct(id,product));
       }*/
     @DeleteMapping("/product")
+
     public String deleteProductById(@RequestParam String wid ,  String pid , @RequestHeader("Authorization") String Authorization){
         String token = Authorization.substring(7);
         String tokenUsername = jwtUtil.extractUsername(token);
 
         return productService.deleteProduct(wid , pid , tokenUsername);
     }
+
    @PostMapping("/signup")
+
     public String Signup(@RequestBody User user) throws ResourceNotFoundException {
         return userService.createUser(user);
 

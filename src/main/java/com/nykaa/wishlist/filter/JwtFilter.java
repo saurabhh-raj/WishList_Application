@@ -5,6 +5,7 @@ package com.nykaa.wishlist.filter;
         import com.nykaa.wishlist.Util.JwtUtil;
         import com.nykaa.wishlist.service.UserService;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.core.annotation.Order;
         import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
         import org.springframework.security.core.context.SecurityContextHolder;
         import org.springframework.security.core.userdetails.UserDetails;
@@ -54,5 +55,7 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
+        httpServletResponse.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods","POST, GET, OPTIONS, HEAD");
     }
 }
