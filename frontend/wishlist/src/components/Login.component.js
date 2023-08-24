@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -26,8 +28,19 @@ function Login() {
         };
 
         try {
-            const response = await axios.post('http://localhost:9090/authenticate', JSON.stringify(formData), { headers });
-            console.log(response.data); // Handle successful response
+            const response = await axios.post('api/authenticate', JSON.stringify(formData), { headers });
+            // Handle successful response
+
+            if( response.status === 200){
+                    localStorage.setItem('token', response.data); //storing the token in localStorage.
+//                    this.props.history.push('/MyPlaces');
+
+                    navigate("/wishlist");
+                } else {
+                    const error = new Error(response.error);
+                    throw error;
+                }
+
         } catch (error) {
             console.error('An error occurred:', error); // Handle error
         }

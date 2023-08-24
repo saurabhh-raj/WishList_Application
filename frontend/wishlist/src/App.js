@@ -6,8 +6,16 @@ import Login from './components/Login.component.js';
 import GetProducts from './components/GetProducts.js';
 import AddProducts from './components/AddProducts.js';
 import RemoveProducts from './components/RemoveProducts.js';
+import GetWishlists from './components/GetWishlists.js';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+//import setupProxy from './components/setupProxy.js';
+//const setupProxy = require('./setupProxy');
+//setupProxy(App);
 
 function App() {
+
  /*   const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -38,13 +46,23 @@ function App() {
     };
 */
     return (
-        <div>
+     /*   <div>
         <Signup/>
          <Login/>
+        <GetWishlists/>
          <GetProducts/>
          <AddProducts/>
          <RemoveProducts/>
-        </div>
+
+        </div>*/
+         <Router>
+
+              <Routes>
+                <Route path="/" element={[<Signup />,<Login />]} />
+                <Route path="/wishlist" element={[<GetWishlists />,<GetProducts/>,<AddProducts/>,<RemoveProducts/>]} />
+
+              </Routes>
+            </Router>
     );
 }
 

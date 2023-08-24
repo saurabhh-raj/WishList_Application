@@ -26,7 +26,7 @@ function Signup() {
         };
 
         try {
-            const response = await axios.post('http://localhost:9090/signup', JSON.stringify(formData), { headers });
+            const response = await axios.post('api/signup', JSON.stringify(formData), { headers });
             console.log(response.data); // Handle successful response
         } catch (error) {
             console.error('An error occurred:', error); // Handle error

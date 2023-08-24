@@ -33,7 +33,7 @@ function AddProducts() {
   },
 
 };*/
-let t = formData.token;
+let t =  localStorage.getItem('token');
 
 let axiosConfig = {
       headers: {
@@ -46,18 +46,11 @@ let axiosConfig = {
 
         try {
 
-            const response = await axios.post('http://localhost:9090/product', {data :{
-'CustomerId':'1',
-'userBucketId': 'lapotp',
-'productId': 'PDX',
-'customer': '22',
-'price': '2300',
-'name': 'iphoneX'
-                                                                                              }},
+            const response = await axios.post('api/product', formData,
        axiosConfig
 
         );
-         console.log("try block")
+
             console.log(response.data); // Handle successful response
         } catch (error) {
 
@@ -70,10 +63,7 @@ console.log( JSON.stringify(axiosConfig.headers));
         <div>
             <h1>AddProducts </h1>
             <form onSubmit={handleSignup}>
-                <div>
-                    <label>Token</label>
-                    <input type="text" name="token" value={formData.token} onChange={handleChange} />
-                </div>
+
 
                 <div>
                     <label>userBucketId</label>

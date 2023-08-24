@@ -4,7 +4,6 @@ import axios from 'axios';
 
 function RemoveProducts() {
     const [formData, setFormData] = useState({
-        token: '',
         wid: '',
         pid: ''
     });
@@ -29,7 +28,7 @@ function RemoveProducts() {
   },
 
 };*/
-let t = formData.token;
+let t =  localStorage.getItem('token');
 
 let axiosConfig = {
       headers: {
@@ -39,10 +38,11 @@ let axiosConfig = {
       },
     };
 console.log(formData)
+let param = { params  : {'wid':formData.wid , 'pid':formData.pid}};
         try {
 
-            const response = await axios.delete('http://localhost:9090/product',{ params  : {'wid':formData.userBucketId , 'pid':formData.productId}},
-       axiosConfig
+            const response = await axios.delete('api/product',param,
+       { headers : axiosConfig}
 
         );
          console.log("try block")
@@ -58,10 +58,7 @@ console.log( JSON.stringify(axiosConfig.headers));
         <div>
             <h1>RemoveProducts </h1>
             <form onSubmit={handleSignup}>
-                <div>
-                    <label>Token</label>
-                    <input type="text" name="token" value={formData.token} onChange={handleChange} />
-                </div>
+
                 <div>
                     <label>userBucketId</label>
                     <input type="text" name="wid" value={formData.wid} onChange={handleChange} />

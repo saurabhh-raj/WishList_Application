@@ -1,0 +1,66 @@
+/* styles.css *//*
+
+
+*/
+/* Basic reset for margins and paddings *//*
+
+body, h1, h2, h3, p, ul, li, table, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+*/
+/* Center the content in the page *//*
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+.wname {
+  width: 50%; */
+/* Adjust as needed *//*
+
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+*/
+/* Style for the table itself *//*
+
+.wname table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+*/
+/* Style for table headers *//*
+
+.wname th {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+*/
+/* Style for table data cells *//*
+
+.wname td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+*/
+/* Align the table container to the right *//*
+
+.wname.right {
+  margin-left: auto;
+  margin-right: 0;
+}
+*/
