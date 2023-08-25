@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles.css'
 
 function RemoveProducts() {
     const [formData, setFormData] = useState({
@@ -38,11 +39,11 @@ let axiosConfig = {
       },
     };
 console.log(formData)
-let param = { params  : {'wid':formData.wid , 'pid':formData.pid}};
+let param = { params  : {'wid':formData.wid , 'pid':formData.pid} ,...axiosConfig};
         try {
 
             const response = await axios.delete('api/product',param,
-       { headers : axiosConfig}
+
 
         );
          console.log("try block")
@@ -56,22 +57,38 @@ console.log( JSON.stringify(axiosConfig.headers));
 
     return (
         <div>
-            <h1>RemoveProducts </h1>
-            <form onSubmit={handleSignup}>
+           <div class="remove-products-container">
+             <h1 class="remove-products-title">Remove Products</h1>
+             <form onSubmit={handleSignup}>
 
-                <div>
-                    <label>userBucketId</label>
-                    <input type="text" name="wid" value={formData.wid} onChange={handleChange} />
-                </div>
+               <div class="form-group">
+                 <label for="wid" class="form-label">User Bucket ID</label>
+                 <input
+                   type="text"
+                   class="form-control"
+                   id="wid"
+                   name="wid"
+                   value={formData.wid}
+                   onChange={handleChange}
+                 />
+               </div>
 
+               <div class="form-group">
+                 <label for="pid" class="form-label">Product ID</label>
+                 <input
+                   type="text"
+                   class="form-control"
+                   id="pid"
+                   name="pid"
+                   value={formData.pid}
+                   onChange={handleChange}
+                 />
+               </div>
 
-                <div>
-                    <label>ProductId</label>
-                    <input type="text" name="pid" value={formData.pid} onChange={handleChange} />
-                </div>
+               <button type="submit" class="btn btn-primary">Delete Product</button>
+             </form>
+           </div>
 
-                <button type="submit">Delete Product</button>
-            </form>
         </div>
     );
 }

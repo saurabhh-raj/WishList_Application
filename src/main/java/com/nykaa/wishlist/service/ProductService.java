@@ -8,6 +8,8 @@ public interface ProductService {
 //    static List<Product> queryForRecords(String id, String pID) {
 //    }
 
+    List<String> getWishlists( String tokenUsername);
+
     List<Product> getProductList(String userBucketId , String tokenUsername);
     String saveProduct(Product product  );
     List<Product> getProductById(String id  , String pId );

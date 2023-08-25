@@ -64,3 +64,98 @@ body {
   margin-right: 0;
 }
 */
+
+/* styles.css */
+
+/* Add any other styles as needed */
+
+
+/* styles.css */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.remove-products-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* styles.css */
+.product-table-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hed {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.wname {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.wname th,
+.wname td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+.wname th {
+  background-color: #f2f2f2;
+}
+
+.wname tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.wname tr:hover {
+  background-color: #e0e0e0;
+}
+
+

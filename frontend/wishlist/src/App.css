@@ -40,4 +40,34 @@ input {
 	outline: none;
 	margin: 5px;
 }
+/* styles.css */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.box-container {
+  display: flex;
+  flex-wrap: wrap; /* Add the flex-wrap property */
+  justify-content: space-between; /* Keep components spaced between */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  gap: 0px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  flex: 1; /* Expand to take available space */
+}
+
+/* Shift RemoveProducts to the left */
+.remove-products {
+  order: -1; /* Move to the beginning of the flex container */
+}

@@ -1,18 +1,29 @@
 package com.nykaa.wishlist.service;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.nykaa.wishlist.model.Product;
 import com.nykaa.wishlist.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService{
 
   @Autowired
   ProductRepository productRepository;
+
+    @Override
+    public List<String> getWishlists(String tokenUsername) {
+
+        return productRepository.findWishlistsByUsername(tokenUsername);
+
+    }
 
     @Override
     public List<Product> getProductList( String userBucketId ,  String tokenUsername) {

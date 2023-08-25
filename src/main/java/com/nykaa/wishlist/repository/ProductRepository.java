@@ -67,6 +67,7 @@ public class ProductRepository {
         return (List<Product>) product;*/
     }
 
+
     public List <Product> findById(String id , String pID ) {
  /*       List<Product> records = ProductService.queryForRecords(id, pID);
         return ResponseEntity.ok(records);*/
@@ -112,6 +113,33 @@ public class ProductRepository {
         else return  x.get(0);
     }
 
+    public List <String> findWishlistsByUsername(String username) {
+ /*       List<Product> records = ProductService.queryForRecords(id, pID);
+        return ResponseEntity.ok(records);*/
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":val1", new AttributeValue().withS(username));
+
+
+
+        //  DynamoDBQueryExpression<Product> queryExpression = new DynamoDBQueryExpression<Product>()
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("customer = :val1")
+                .withExpressionAttributeValues(eav);
+
+        List<Product > Pds = dynamoDBMapper.scan(Product.class, scanExpression);
+        Set<String> hash_Set = new HashSet<String>();
+        for(Product pd : Pds)
+        {
+            hash_Set.add(pd.getUserBucketId());
+        }
+        List<String > wishlistsIds = new ArrayList<>();
+        for(String pd : hash_Set)
+        {
+           wishlistsIds.add(pd);
+        }
+        return wishlistsIds;
+        //  return dynamoDBMapper.load(Product.class, id , pID  );
+    }
 
 
 /*  public String updateCustomer(String customerId, Product customer) {

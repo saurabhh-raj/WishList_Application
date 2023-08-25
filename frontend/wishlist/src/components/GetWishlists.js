@@ -48,14 +48,15 @@ console.log( JSON.stringify(axiosConfig.headers));
 
     return (
         <div>
-            <h1>GetWishlists </h1>
-            <form onSubmit={handleSignup}>
 
-                <button type="submit">Get Wishlist ids</button>
+            <form onSubmit={handleSignup} class="form-container">
+            <h1>GetWishlists </h1>
+                <button type="submit" class="btn btn-primary">Get Wishlists</button>
 <table class ="wnames">
                       {showTable && (
 
 <tbody>
+<th> Wishlists </th>
 <Fragment>
                     {data.map((item) => (
                               <tr key={item}>

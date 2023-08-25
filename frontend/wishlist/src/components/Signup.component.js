@@ -35,18 +35,35 @@ function Signup() {
 
     return (
         <div>
-            <h1>Signup </h1>
-            <form onSubmit={handleSignup}>
-                <div>
-                    <label>Username</label>
-                    <input type="text" name="username" value={formData.username} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} />
-                </div>
-                <button type="submit">Signup</button>
-            </form>
+           <div className="signup-container">
+             <h1 className="signup-title">Signup</h1>
+             <form onSubmit={handleSignup}>
+               <div className="form-group">
+                 <label htmlFor="username" className="form-label">Username</label>
+                 <input
+                   type="text"
+                   className="form-control"
+                   id="username"
+                   name="username"
+                   value={formData.username}
+                   onChange={handleChange}
+                 />
+               </div>
+               <div className="form-group">
+                 <label htmlFor="password" className="form-label">Password</label>
+                 <input
+                   type="password"
+                   className="form-control"
+                   id="password"
+                   name="password"
+                   value={formData.password}
+                   onChange={handleChange}
+                 />
+               </div>
+               <button type="submit" className="btn btn-primary">Signup</button>
+             </form>
+           </div>
+
         </div>
     );
 }

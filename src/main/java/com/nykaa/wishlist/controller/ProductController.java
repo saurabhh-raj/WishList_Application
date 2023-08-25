@@ -79,6 +79,13 @@ public class  ProductController {
         System.out.println("ptinr");
         return ResponseEntity.ok(productService.getProductList(userBucketId , userName));
     }
+    @GetMapping("/wishlists")
+    public ResponseEntity<List<String>> getWishlists(@RequestHeader("Authorization") String Authorization){
+        String token = Authorization.substring(7);
+        String userName = jwtUtil.extractUsername(token);
+      //  System.out.println("ptinr");
+        return ResponseEntity.ok(productService.getWishlists( userName));
+    }
     /*  @PutMapping("/product/{userBucketId}")
       public ResponseEntity<Product> updateProduct(@PathVariable String id,@RequestBody Product product){
           return ResponseEntity.ok(productService.updateProduct(id,product));

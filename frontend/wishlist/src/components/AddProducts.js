@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles.css';
+
 
 function AddProducts() {
     const [formData, setFormData] = useState({
@@ -60,30 +62,57 @@ console.log( JSON.stringify(axiosConfig.headers));
     };
 
     return (
-        <div>
-            <h1>AddProducts </h1>
-            <form onSubmit={handleSignup}>
+        <div >
 
+           <form onSubmit={handleSignup} class="form-container">
+           <h1> Add Products </h1>
+             <div class="form-group">
+               <label for="userBucketId" class="form-label">User Bucket ID</label>
+               <input
+                 type="text"
+                 class="form-control"
+                 id="userBucketId"
+                 name="userBucketId"
+                 value={formData.userBucketId}
+                 onChange={handleChange}
+               />
+             </div>
+             <div class="form-group">
+               <label for="productId" class="form-label">Product ID</label>
+               <input
+                 type="text"
+                 class="form-control"
+                 id="productId"
+                 name="productId"
+                 value={formData.productId}
+                 onChange={handleChange}
+               />
+             </div>
+             <div class="form-group">
+               <label for="name" class="form-label">Name</label>
+               <input
+                 type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 value={formData.name}
+                 onChange={handleChange}
+               />
+             </div>
+             <div class="form-group">
+               <label for="price" class="form-label">Price</label>
+               <input
+                 type="text"
+                 class="form-control"
+                 id="price"
+                 name="price"
+                 value={formData.price}
+                 onChange={handleChange}
+               />
+             </div>
+             <button type="submit" class="btn btn-primary">Add Product</button>
+           </form>
 
-                <div>
-                    <label>userBucketId</label>
-                    <input type="text" name="userBucketId" value={formData.userBucketId} onChange={handleChange} />
-                </div>
-                <div>
-                                    <label>ProductId</label>
-                                    <input type="text" name="productId" value={formData.productId} onChange={handleChange} />
-                                </div>
-                                <div>
-                                                                    <label>Name</label>
-                                                                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
-                                                                </div>
-
-                           <div>
-                                                               <label>Price</label>
-                                                               <input type="text" name="price" value={formData.price} onChange={handleChange} />
-                                                           </div>
-                <button type="submit"> Add Product</button>
-            </form>
         </div>
     );
 }

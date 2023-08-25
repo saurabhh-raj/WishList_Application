@@ -7,9 +7,10 @@ import GetProducts from './components/GetProducts.js';
 import AddProducts from './components/AddProducts.js';
 import RemoveProducts from './components/RemoveProducts.js';
 import GetWishlists from './components/GetWishlists.js';
-import ReactDOM from "react-dom/client";
+import Navbar from './Navbar.js';
+//import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import './App.css'
 //import setupProxy from './components/setupProxy.js';
 //const setupProxy = require('./setupProxy');
 //setupProxy(App);
@@ -55,14 +56,28 @@ function App() {
          <RemoveProducts/>
 
         </div>*/
-         <Router>
+        <>
+<Navbar/>
+       <Router>
+                     <div className="app-container">
 
-              <Routes>
-                <Route path="/" element={[<Signup />,<Login />]} />
-                <Route path="/wishlist" element={[<GetWishlists />,<GetProducts/>,<AddProducts/>,<RemoveProducts/>]} />
+                       <Routes>
+                         <Route path="/" element={<div className="box-container">
+                           <Signup />
+                           <Login />
+                         </div>} />
+                         <Route path="/wishlist" element={<div className="box-container">
+                                     <RemoveProducts />
 
-              </Routes>
-            </Router>
+                                     <GetProducts />
+                                     <AddProducts />
+                                   <div className="remove-products">
+                            <GetWishlists /></div>
+                         </div>} />
+                       </Routes>
+                     </div>
+                   </Router></>
+
     );
 }
 
